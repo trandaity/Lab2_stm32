@@ -5,4 +5,5 @@
  *      Author: trand
  */
 
-int switch7SEG = 1;
+#include "global.h"
+int switch7SEG = FIRST_LED;
