@@ -5,4 +5,4 @@
  *      Author: trand
  */
 
-
+int switch7SEG = 0;
