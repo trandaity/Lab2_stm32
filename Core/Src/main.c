@@ -99,28 +99,41 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   setTimer1(50);
+  setTimer2(100);
   while (1)
   {
 	  if(timer1_flag == 1)
 	  {
-		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+//		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
 		  turnOff7SEG();
 		  switch(switch7SEG)
 		  {
-		  	  case 1: //Turn on the first 7SEG LED
+		  	  case FIRST_LED: //Turn on the first 7SEG LED
 		  	  {
-		  		  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 0);
-		  		  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 1);
+		  		  turnOn7SEG(FIRST_LED);
 		  		  display7SEG(1);
-		  		  switch7SEG = 2;
+		  		  switch7SEG = SECOND_LED;
 		  		  break;
 		  	  }
-		  	  case 2: //Turn on the second 7SEG LED
+		  	  case SECOND_LED: //Turn on the second 7SEG LED
 		  	  {
-		  		  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 1);
-		  		  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 0);
+		  		  turnOn7SEG(SECOND_LED);
 		  		  display7SEG(2);
-		  		  switch7SEG = 1;
+		  		  switch7SEG = THIRD_LED;
+		  		  break;
+		  	  }
+		  	  case THIRD_LED:
+		  	  {
+		  		  turnOn7SEG(THIRD_LED);
+		  		  display7SEG(3);
+		  		  switch7SEG = FOURTH_LED;
+		  		  break;
+		  	  }
+		  	  case FOURTH_LED:
+		  	  {
+		  		  turnOn7SEG(FOURTH_LED);
+		  		  display7SEG(0);
+		  		  switch7SEG = FIRST_LED;
 		  		  break;
 		  	  }
 		  	  default:
@@ -130,6 +143,12 @@ int main(void)
 		  	  }
 		  }
 		  setTimer1(50);
+	  }
+
+	  if(timer2_flag == 1)
+	  {
+		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
+		  setTimer2(100);
 	  }
     /* USER CODE END WHILE */
 
