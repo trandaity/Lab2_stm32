@@ -7,6 +7,7 @@
 
 #include "main.h"
 #include "display7SEG.h"
+#include "global.h"
 
 void turnOff7SEG(){
 	HAL_GPIO_WritePin(A_GPIO_Port, A_Pin, 1);
@@ -50,6 +51,36 @@ void turnOn7SEG(int num){
 			HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 1);
 			HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, 1);
 			HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, 0);
+			break;
+		}
+		default: break;
+	}
+}
+
+void update7SEG(int index){
+	switch(index) {
+		case FIRST_LED:
+		{
+			turnOn7SEG(FIRST_LED);
+			display7SEG(led_buffer[index]);
+			break;
+		}
+		case SECOND_LED:
+		{
+	  		turnOn7SEG(SECOND_LED);
+			display7SEG(led_buffer[index]);
+			break;
+		}
+		case THIRD_LED:
+		{
+	  		turnOn7SEG(THIRD_LED);
+			display7SEG(led_buffer[index]);
+			break;
+		}
+		case FOURTH_LED:
+		{
+	  		turnOn7SEG(FOURTH_LED);
+			display7SEG(led_buffer[index]);
 			break;
 		}
 		default: break;
