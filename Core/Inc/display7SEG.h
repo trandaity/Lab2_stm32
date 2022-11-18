@@ -10,5 +10,7 @@
 
 void turnOff7SEG();
 void display7SEG (int num);
+void turnOn7SEG();
+void update7SEG(int index);
 
 #endif /* INC_DISPLAY7SEG_H_ */

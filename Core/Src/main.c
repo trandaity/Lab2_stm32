@@ -20,8 +20,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "software_timer.h"
-#include "display7SEG.h"
 #include "global.h"
+#include "display7SEG.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -98,38 +98,59 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  setTimer1(50);
+  setTimer1(25);
+  setTimer2(100);
   while (1)
   {
 	  if(timer1_flag == 1)
 	  {
-		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+//		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+//		  switch(switch7SEG)
+//		  {
+//		  	  case FIRST_LED: //Turn on the first 7SEG LED
+//		  	  {
+//		  		  turnOn7SEG(FIRST_LED);
+//		  		  //display7SEG(1);
+//		  		  switch7SEG = SECOND_LED;
+//		  		  break;
+//		  	  }
+//		  	  case SECOND_LED: //Turn on the second 7SEG LED
+//		  	  {
+//		  		  turnOn7SEG(SECOND_LED);
+//		  		  //display7SEG(2);
+//		  		  switch7SEG = THIRD_LED;
+//		  		  break;
+//		  	  }
+//		  	  case THIRD_LED:
+//		  	  {
+//		  		  turnOn7SEG(THIRD_LED);
+//		  		  //display7SEG(3);
+//		  		  switch7SEG = FOURTH_LED;
+//		  		  break;
+//		  	  }
+//		  	  case FOURTH_LED:
+//		  	  {
+//		  		  turnOn7SEG(FOURTH_LED);
+//		  		  //display7SEG(0);
+//		  		  switch7SEG = FIRST_LED;
+//		  		  break;
+//		  	  }
+//		  	  default:
+//		  	  {
+//		  		  turnOff7SEG();
+//		  		  break;
+//		  	  }
+//		  }
 		  turnOff7SEG();
-		  switch(switch7SEG)
-		  {
-		  	  case 1: //Turn on the first 7SEG LED
-		  	  {
-		  		  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 0);
-		  		  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 1);
-		  		  display7SEG(1);
-		  		  switch7SEG = 2;
-		  		  break;
-		  	  }
-		  	  case 2: //Turn on the second 7SEG LED
-		  	  {
-		  		  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 1);
-		  		  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 0);
-		  		  display7SEG(2);
-		  		  switch7SEG = 1;
-		  		  break;
-		  	  }
-		  	  default:
-		  	  {
-		  		  turnOff7SEG();
-		  		  break;
-		  	  }
-		  }
-		  setTimer1(50);
+		  if(index_led >= 4) index_led = 0;
+		  update7SEG(index_led++);
+		  setTimer1(25);
+	  }
+
+	  if(timer2_flag == 1)
+	  {
+		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
+		  setTimer2(100);
 	  }
     /* USER CODE END WHILE */
 
@@ -232,14 +253,17 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LED_RED_Pin|EN0_Pin|EN1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, DOT_Pin|LED_RED_Pin|EN0_Pin|EN1_Pin
+                          |EN2_Pin|EN3_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, A_Pin|B_Pin|C_Pin|D_Pin
                           |E_Pin|F_Pin|G_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : LED_RED_Pin EN0_Pin EN1_Pin */
-  GPIO_InitStruct.Pin = LED_RED_Pin|EN0_Pin|EN1_Pin;
+  /*Configure GPIO pins : DOT_Pin LED_RED_Pin EN0_Pin EN1_Pin
+                           EN2_Pin EN3_Pin */
+  GPIO_InitStruct.Pin = DOT_Pin|LED_RED_Pin|EN0_Pin|EN1_Pin
+                          |EN2_Pin|EN3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
