@@ -67,19 +67,19 @@ void update7SEG(int index){
 		}
 		case SECOND_LED:
 		{
-	  		turnOn7SEG(SECOND_LED);
+			turnOn7SEG(SECOND_LED);
 			display7SEG(led_buffer[index]);
 			break;
 		}
 		case THIRD_LED:
 		{
-	  		turnOn7SEG(THIRD_LED);
+			turnOn7SEG(THIRD_LED);
 			display7SEG(led_buffer[index]);
 			break;
 		}
 		case FOURTH_LED:
 		{
-	  		turnOn7SEG(FOURTH_LED);
+			turnOn7SEG(FOURTH_LED);
 			display7SEG(led_buffer[index]);
 			break;
 		}

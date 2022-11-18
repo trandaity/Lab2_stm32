@@ -20,8 +20,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "software_timer.h"
-#include "display7SEG.h"
 #include "global.h"
+#include "display7SEG.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -98,51 +98,53 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  setTimer1(50);
+  setTimer1(250);
   setTimer2(100);
   while (1)
   {
 	  if(timer1_flag == 1)
 	  {
 //		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+//		  switch(switch7SEG)
+//		  {
+//		  	  case FIRST_LED: //Turn on the first 7SEG LED
+//		  	  {
+//		  		  turnOn7SEG(FIRST_LED);
+//		  		  //display7SEG(1);
+//		  		  switch7SEG = SECOND_LED;
+//		  		  break;
+//		  	  }
+//		  	  case SECOND_LED: //Turn on the second 7SEG LED
+//		  	  {
+//		  		  turnOn7SEG(SECOND_LED);
+//		  		  //display7SEG(2);
+//		  		  switch7SEG = THIRD_LED;
+//		  		  break;
+//		  	  }
+//		  	  case THIRD_LED:
+//		  	  {
+//		  		  turnOn7SEG(THIRD_LED);
+//		  		  //display7SEG(3);
+//		  		  switch7SEG = FOURTH_LED;
+//		  		  break;
+//		  	  }
+//		  	  case FOURTH_LED:
+//		  	  {
+//		  		  turnOn7SEG(FOURTH_LED);
+//		  		  //display7SEG(0);
+//		  		  switch7SEG = FIRST_LED;
+//		  		  break;
+//		  	  }
+//		  	  default:
+//		  	  {
+//		  		  turnOff7SEG();
+//		  		  break;
+//		  	  }
+//		  }
 		  turnOff7SEG();
-		  switch(switch7SEG)
-		  {
-		  	  case FIRST_LED: //Turn on the first 7SEG LED
-		  	  {
-		  		  turnOn7SEG(FIRST_LED);
-		  		  display7SEG(1);
-		  		  switch7SEG = SECOND_LED;
-		  		  break;
-		  	  }
-		  	  case SECOND_LED: //Turn on the second 7SEG LED
-		  	  {
-		  		  turnOn7SEG(SECOND_LED);
-		  		  display7SEG(2);
-		  		  switch7SEG = THIRD_LED;
-		  		  break;
-		  	  }
-		  	  case THIRD_LED:
-		  	  {
-		  		  turnOn7SEG(THIRD_LED);
-		  		  display7SEG(3);
-		  		  switch7SEG = FOURTH_LED;
-		  		  break;
-		  	  }
-		  	  case FOURTH_LED:
-		  	  {
-		  		  turnOn7SEG(FOURTH_LED);
-		  		  display7SEG(0);
-		  		  switch7SEG = FIRST_LED;
-		  		  break;
-		  	  }
-		  	  default:
-		  	  {
-		  		  turnOff7SEG();
-		  		  break;
-		  	  }
-		  }
-		  setTimer1(50);
+		  if(index_led >= MAX_LED) index_led = 0;
+		  update7SEG(index_led++);
+		  setTimer1(250);
 	  }
 
 	  if(timer2_flag == 1)
