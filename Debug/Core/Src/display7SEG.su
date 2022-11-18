@@ -1,2 +1,4 @@
-display7SEG.c:11:6:turnOff7SEG	8	static
-display7SEG.c:21:6:display7SEG	16	static
+display7SEG.c:12:6:turnOff7SEG	8	static
+display7SEG.c:22:6:turnOn7SEG	16	static
+display7SEG.c:60:6:update7SEG	16	static
+display7SEG.c:90:6:display7SEG	16	static

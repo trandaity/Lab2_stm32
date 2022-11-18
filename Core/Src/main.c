@@ -98,7 +98,7 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  setTimer1(250);
+  setTimer1(25);
   setTimer2(100);
   while (1)
   {
@@ -142,9 +142,9 @@ int main(void)
 //		  	  }
 //		  }
 		  turnOff7SEG();
-		  if(index_led >= MAX_LED) index_led = 0;
+		  if(index_led >= 4) index_led = 0;
 		  update7SEG(index_led++);
-		  setTimer1(250);
+		  setTimer1(25);
 	  }
 
 	  if(timer2_flag == 1)
