@@ -101,48 +101,12 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   setTimer1(25);
   setTimer2(100);
+  setTimer3(100);
   updateClockBuffer();
   while (1)
   {
 	  if(timer1_flag == 1)
 	  {
-//		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
-//		  switch(switch7SEG)
-//		  {
-//		  	  case FIRST_LED: //Turn on the first 7SEG LED
-//		  	  {
-//		  		  turnOn7SEG(FIRST_LED);
-//		  		  //display7SEG(1);
-//		  		  switch7SEG = SECOND_LED;
-//		  		  break;
-//		  	  }
-//		  	  case SECOND_LED: //Turn on the second 7SEG LED
-//		  	  {
-//		  		  turnOn7SEG(SECOND_LED);
-//		  		  //display7SEG(2);
-//		  		  switch7SEG = THIRD_LED;
-//		  		  break;
-//		  	  }
-//		  	  case THIRD_LED:
-//		  	  {
-//		  		  turnOn7SEG(THIRD_LED);
-//		  		  //display7SEG(3);
-//		  		  switch7SEG = FOURTH_LED;
-//		  		  break;
-//		  	  }
-//		  	  case FOURTH_LED:
-//		  	  {
-//		  		  turnOn7SEG(FOURTH_LED);
-//		  		  //display7SEG(0);
-//		  		  switch7SEG = FIRST_LED;
-//		  		  break;
-//		  	  }
-//		  	  default:
-//		  	  {
-//		  		  turnOff7SEG();
-//		  		  break;
-//		  	  }
-//		  }
 		  turnOff7SEG();
 		  if(index_led >= 4) index_led = 0;
 		  update7SEG(index_led++);
@@ -151,6 +115,11 @@ int main(void)
 
 	  if(timer2_flag == 1)
 	  {
+		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
+		  setTimer2(100);
+	  }
+
+	  if(timer3_flag == 1) {
 		  second++;
 		  if(second >= 60)
 		  {
@@ -166,10 +135,8 @@ int main(void)
 		  {
 			  hour = 0;
 		  }
-
 		  updateClockBuffer();
-		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
-		  setTimer2(100);
+		  setTimer3(100);
 	  }
     /* USER CODE END WHILE */
 
